@@ -1,8 +1,9 @@
 # Project : Property-Exhibition
 # Team: CodeDjangoSquad
 
-clone git 
+Our Github Collaboration steps
+clone git
 git switch -c YourBrunch
 before starting your work
 pull development brunch
-add commit push
+all work finishing after add, commit, push
