@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
-from .forms import LoginForm
+from django.contrib.auth import authenticate, login
 
 
 # Create your views here.
@@ -16,7 +16,13 @@ def user_login(request):
     if request.method == "POST":
         email = request.POST["email"]
         password = request.POST["password"]
-        print(email)
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request, user)
+            print("login success")
+            return redirect("profile")
+        else:
+            redirect("login")
     return render(request, "signin.html")
 
 
