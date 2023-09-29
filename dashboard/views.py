@@ -5,17 +5,17 @@ from accounts.models import Account
 
 
 # Create your views here.
-@login_required
+@login_required(login_url="login")
 def dashbaord_view(request):
     return render(request, "dashboard.html")
 
 
-@login_required
+@login_required(login_url="login")
 def user_profile(request):
     return render(request, "user_profile.html")
 
 
-@login_required
+@login_required(login_url="login")
 def edit_profile(request):
     user = Account.objects.get(email=request.user)
 
@@ -30,6 +30,6 @@ def edit_profile(request):
     return render(request, "edit_profile.html", {"form": form})
 
 
-@login_required
+@login_required(login_url="login")
 def all_property_manage(request):
     return render(request, "all_properties.html")
