@@ -38,8 +38,7 @@ def user_login(request):
         print(user)
         if user is not None:
             login(request, user)
-            print("login success")
-            return redirect("profile")
+            return redirect("dashboard")
         else:
             redirect("login")
     return render(request, "signin.html")
