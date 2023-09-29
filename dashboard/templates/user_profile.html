@@ -43,7 +43,7 @@
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">
                     <button @click="open = !open"
                         class="flex flex-row items-center space-x-2 w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent hover:bg-blue-800 md:w-auto md:inline md:mt-0 md:ml-4 focus:bg-blue-800 focus:outline-none focus:shadow-outline">
-                        <span>Jane Doe</span>
+                        <span>{{request.user}}</span>
                         <img class="inline h-6 rounded-full"
                             src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4">
                         <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
@@ -67,7 +67,7 @@
                                 href="#">Help</a>
                             <div class="border-b"></div>
                             <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                href="#">Logout</a>
+                                href="{% url 'logout' %}">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -77,9 +77,9 @@
     <!-- End of Navbar -->
 
     <div class="container mx-auto my-5 p-5">
-        <div class="md:flex no-wrap md:-mx-2 ">
+        <div class="md:-mx-2 ">
             <!-- Left Side -->
-            <div class="w-full md:w-3/12 md:mx-2">
+            <div class="w-full md:w-1/5  md:mx-2">
                 <!-- Profile Card -->
                 <div class="bg-white p-3 border-t-4 border-green-400">
                     <div class="image overflow-hidden">
@@ -87,11 +87,10 @@
                             src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
                             alt="">
                     </div>
-                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">Jane Doe</h1>
-                    <h3 class="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
-                    <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit.
-                        Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non deserunt</p>
+                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{request.user.first_name}}
+                        {{request.user.last_name}}</h1>
+                    <h3 class="text-gray-600 font-lg text-semibold leading-6">Owner at His Company Inc.</h3>
+                    <p class="text-sm text-gray-500 hover:text-gray-600 leading-6"></p>
                     <ul
                         class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                         <li class="flex items-center py-3">
@@ -101,7 +100,7 @@
                         </li>
                         <li class="flex items-center py-3">
                             <span>Member since</span>
-                            <span class="ml-auto">Nov 07, 2016</span>
+                            <span class="ml-auto">{{request.user.date_joined}}</span>
                         </li>
                     </ul>
                 </div>
@@ -110,7 +109,7 @@
 
             </div>
             <!-- Right Side -->
-            <div class="w-full md:w-9/12 mx-2 h-64">
+            <div class="w-full md:w-4/5  md:mx-2 ">
                 <!-- Profile tab -->
                 <!-- About Section -->
                 <div class="bg-white p-3 shadow-sm rounded-sm">
@@ -128,32 +127,33 @@
                         <div class="grid md:grid-cols-2 text-sm">
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">First Name</div>
-                                <div class="px-4 py-2">Jane</div>
+                                <div class="px-4 py-2">{{request.user.first_name}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Last Name</div>
-                                <div class="px-4 py-2">Doe</div>
+                                <div class="px-4 py-2">{{request.user.last_name}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Gender</div>
-                                <div class="px-4 py-2">Female</div>
+                                <div class="px-4 py-2">Male</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Contact No.</div>
-                                <div class="px-4 py-2">+11 998001001</div>
+                                <div class="px-4 py-2">{{request.user.phone_number}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Current Address</div>
-                                <div class="px-4 py-2">Beech Creek, PA, Pennsylvania</div>
+                                <div class="px-4 py-2">{{request.user.address}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Permanant Address</div>
-                                <div class="px-4 py-2">Arlington Heights, IL, Illinois</div>
+                                <div class="px-4 py-2">{{request.user.city}}, {{request.user.state}},
+                                    {{request.user.country}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Email.</div>
                                 <div class="px-4 py-2">
-                                    <a class="text-blue-800" href="mailto:jane@example.com">jane@example.com</a>
+                                    <a class="text-blue-800" href="mailto:jane@example.com">{{request.user.email}}</a>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2">
@@ -162,9 +162,9 @@
                             </div>
                         </div>
                     </div>
-                    <button
-                        class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">Edit
-                        Profile</button>
+                    <a href="{% url 'edit_profile' %}"
+                        class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4 text-center">Edit
+                        Profile</a>
                 </div>
                 <!-- End of about section -->
 
