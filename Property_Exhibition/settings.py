@@ -33,15 +33,14 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'fontawesomefree',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tailwind',
     "dashboard",
     "accounts",
     "all_property",
+    
 ]
 
 NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"

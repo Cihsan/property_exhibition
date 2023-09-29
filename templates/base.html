@@ -1,103 +1,34 @@
-{% load static tailwind_tags %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{% static 'css/dist/home.css' %}" rel="stylesheet" type="text/css"  />
-    <link href="{% static 'css/dist/nav.css' %}" rel="stylesheet" type="text/css"  />
-  <!-- Font awesome 5 -->
-  <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
-  <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css"  rel="stylesheet" />
-
-  {% tailwind_css %}
-</head>
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Property Exhibition</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap'><link rel="stylesheet" href="./style.css">
+        <link href="https://unpkg.com/tailwindcss@1.4.6/dist/tailwind.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css"  rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
 <body>
-  <heading>
-    <nav class="base-navbar">
-      <ul class="flex justify-between px-64">
-        <div class="flex">
-          <li class="mr-3">
-            <a class=" py-2 px-4 hover:bg-blue-700 text-white" href="#"><img class="base-logo" src="{% static 'images/Property.png'%}"/></a>
-          </li>
-          <li class="text-white base-logo-2 text-3xl font-bold"><span class="text-blue-700">P</span><span class="text-3xl font-bold">roperty</span><br>EXhibition</li>
-        </div>
-       <div class="flex ">
-        <li class="mr-3">
-          <a class=" text-2xl text-white base-li hover:border-black-200 text-blue-500 hover:bg-purple-50 py-2 px-4" href="#">Home</a>
-        </li>
-        <li class="mr-3">
-          <a class=" text-2xl text-white base-li hover:text-black  hover:border-gray-200 text-blue-500 hover:bg-gray-200 py-2 px-4" href="#">About</a>
-        </li>
-        <li class="mr-3">
-          <a class=" text-2xl text-white base-li hover:border-gray-200 text-blue-500 hover:bg-gray-200 py-2 px-4" href="#">Blog</a>
-        </li>
-        <li class="mr-3">
-          <a class=" text-2xl text-white base-li hover:border-gray-200 text-blue-500 hover:bg-gray-200 py-2 px-4" href="#">Properties</a>
-        </li>
-        <li class="mr-3">
-          <a class=" text-2xl text-white base-li hover:border-gray-200 text-blue-500 hover:bg-gray-200 py-2 px-4" href="#">Contact</a>
-        </li>
-       </div>
-        <div>
-          <li class="mr-3">
-           <a class="text-2xl signup-btn text-white py-2 px-4 text-gray-400" href="#">SignUp</a>
-          </li>
-        </div>
-      </ul>
-    </nav>
-  </heading>
-  {% block body %}
+  
+  {% include 'include/navbar.html' %}
 
+  <div class="container mx-auto px-4">
+    {% block body %}
   {% endblock %}
+  </div>
+  {% include 'include/footer.html' %}
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+<script src='https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js'></script>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="https://demo.themesberg.com/windster/app.bundle.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-  <footer class="flex justify-center">
-    <div class="flex footer-body justify-between">
-      <div>
-        <h4 class="font-semibold text-2xl mb-6">About</h4>
-        <p class="font-normal text-lg">Our Real Estate Inc company is <br/> committed to delivering a high level of <br/> expertise, customer service, and<br/> attention to detail to the marketing and<br/> sales of luxury real estate, and rental<br/> properties. It is the best real estate<br/> theme you can have for your business<br/> and your online presence.</p>
-      </div>
-  
-      <div>
-        <h4 class="font-semibold text-2xl mb-6">Contact</h4>
-        <ul>
-          <li clss=""><i class="fa-solid fa-location-dot text-2xl"></i><span class="ml-3">3755 Salem, Corner with Sunny</span></li>
-          <li class="mt-3"><i class="fa-solid fa-phone text-2xl"></i><span class="ml-3">(305) 555-4446</span></li>
-          <li class="mt-3"><i class="fa-solid fa-address-book text-2xl"></i><span class="ml-3">(305) 555-4446</span></li>
-          <li class="mt-3"><i class="fa-regular fa-envelope text-2xl"></i><span class="ml-3">(305) 555-4446</span></li>
-          <li class="mt-3"><i class="fa-solid fa-desktop text-2xl"></i><span class="ml-3">Company Name</span></li>
-        </ul>
-      </div>
-  
-      <div>
-        <h4 class="font-semibold text-2xl mb-6">Recent Listings</h4>
-        <div class="flex mb-3">
-          <img width="100" class="hover:scale-125  p-c-h-img" src="{% static 'images/image-1.png'%}" alt="" />
-          <p class="ml-3">Building Complex<br/> Apartments <br/> 1.000.000 € </p>
-        </div>
-        <div class="flex">
-          <img width="100" class="hover:scale-125  p-c-h-img" src="{% static 'images/image-1.png'%}" alt="" />
-          <p class="ml-3">Building Complex<br/> Apartments <br/> 1.000.000 € </p>
-        </div>
-        
-      </div>
-  
-      <div>
-        <h4 class="font-semibold text-2xl mb-6">Popular Lists</h4>
-        <ul>
-          <li>Bayonne(5)</li>
-          <li>Greenville(4)</li>
-          <li>Manhattan(7)</li>
-          <li>Queens(1)</li>
-          <li>The Heights(2)</li>
-        </ul>
-      </div>
-    </div>
-    
-  </footer>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+<script src="" async defer></script>
 </body>
 </html>
