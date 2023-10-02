@@ -1,5 +1,6 @@
 from django.db import models
 from accounts.models import Account
+from all_property.models import Property
 
 RATING = ((1, 1), (2, 2), (3, 3), (4, 4), (5, 5))
 
@@ -9,7 +10,7 @@ RATING = ((1, 1), (2, 2), (3, 3), (4, 4), (5, 5))
 class Favourites(models.Model):
     favourite_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    # property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    property = models.ForeignKey(Property, on_delete=models.CASCADE)
 
 
 class Testimonial(models.Model):
@@ -26,7 +27,7 @@ class Testimonial(models.Model):
 class Booking(models.Model):
     booking_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    # property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    property = models.ForeignKey(Property, on_delete=models.CASCADE, blank=True)
     booking_date = models.DateTimeField()
     total_amount = models.IntegerField()
     payment_status = models.CharField(
@@ -40,6 +41,6 @@ class Booking(models.Model):
 class Promotion(models.Model):
     promotion_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
-    # property = models.ForeignKey(Property, on_delete=models.CASCADE)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    start_date = models.DateTimeField(blank=True)
+    end_date = models.DateTimeField(blank=True)
