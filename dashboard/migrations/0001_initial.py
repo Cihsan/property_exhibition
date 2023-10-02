@@ -6,7 +6,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,31 +14,61 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Testimonial',
+            name="Testimonial",
             fields=[
-                ('testimonial_id', models.AutoField(primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=50)),
-                ('content', models.TextField(max_length=200)),
-                ('rating', models.IntegerField(choices=[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)], default=5)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("testimonial_id", models.AutoField(primary_key=True, serialize=False)),
+                ("title", models.CharField(max_length=50)),
+                ("content", models.TextField(max_length=200)),
+                (
+                    "rating",
+                    models.IntegerField(
+                        choices=[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)], default=5
+                    ),
+                ),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Favourites',
+            name="Favourites",
             fields=[
-                ('favourite_id', models.AutoField(primary_key=True, serialize=False)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("favourite_id", models.AutoField(primary_key=True, serialize=False)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Booking',
+            name="Booking",
             fields=[
-                ('booking_id', models.AutoField(primary_key=True, serialize=False)),
-                ('booking_date', models.DateTimeField()),
-                ('total_amount', models.IntegerField()),
-                ('payment_status', models.CharField(choices=[('Pending', 'Pending'), ('Completed', 'Completed')], default='Pending', max_length=9)),
-                ('created_at', models.DateTimeField(auto_now=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ("booking_id", models.AutoField(primary_key=True, serialize=False)),
+                ("booking_date", models.DateTimeField()),
+                ("total_amount", models.IntegerField()),
+                (
+                    "payment_status",
+                    models.CharField(
+                        choices=[("Pending", "Pending"), ("Completed", "Completed")],
+                        default="Pending",
+                        max_length=9,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now=True)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

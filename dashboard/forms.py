@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from accounts.models import Account
+from .models import Testimonial
 
 
 class EditProfileForm(ModelForm):
@@ -17,3 +18,16 @@ class EditProfileForm(ModelForm):
             "state",
             "country",
         ]
+
+
+class TestimonialForm(ModelForm):
+    class Meta:
+        model = Testimonial
+        fields = "__all__"
+        exclude = ["user"]
+
+
+# class PropertyForm(ModelForm):
+#     class Meta:
+#         model = Property
+#         fields = "__all__"
