@@ -25,3 +25,9 @@ class TestimonialForm(ModelForm):
         model = Testimonial
         fields = "__all__"
         exclude = ["user"]
+
+
+# class PropertyForm(ModelForm):
+#     class Meta:
+#         model = Property
+#         fields = "__all__"
