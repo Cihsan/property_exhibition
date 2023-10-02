@@ -39,6 +39,7 @@ class Booking(models.Model):
 
 
 class Promotion(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
     promotion_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     property = models.ForeignKey(Property, on_delete=models.CASCADE)

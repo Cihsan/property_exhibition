@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import EditProfileForm, TestimonialForm
+from .forms import EditProfileForm, TestimonialForm, PromotionForm
 from accounts.models import Account
 from .models import Testimonial
 
@@ -51,3 +51,16 @@ def add_testimonial(request):
         form = TestimonialForm(instance=testimonial)
 
     return render(request, "testimonial.html", {"form": form})
+
+
+@login_required(login_url="login")
+def promotions(request):
+    if request.method == "POST":
+        form = PromotionForm(request.POST)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.user = request.user
+            data.save()
+            return redirect("promotions")
+    form = PromotionForm()
+    return render(request, "promotions.html", {"form": form})

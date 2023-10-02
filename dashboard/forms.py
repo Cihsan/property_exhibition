@@ -1,6 +1,12 @@
+from collections.abc import Mapping
+from typing import Any
+from django import forms
+from django.core.files.base import File
+from django.db.models.base import Model
 from django.forms import ModelForm
+from django.forms.utils import ErrorList
 from accounts.models import Account
-from .models import Testimonial
+from .models import Testimonial, Promotion
 
 
 class EditProfileForm(ModelForm):
@@ -27,7 +33,12 @@ class TestimonialForm(ModelForm):
         exclude = ["user"]
 
 
-# class PropertyForm(ModelForm):
-#     class Meta:
-#         model = Property
-#         fields = "__all__"
+class PromotionForm(ModelForm):
+    class Meta:
+        model = Promotion
+        fields = "__all__"
+        exclude = ["user"]
+        widgets = {
+            "start_date": forms.DateTimeInput(attrs={"type": "datetime-local"}),
+            "end_date": forms.DateTimeInput(attrs={"type": "datetime-local"}),
+        }
