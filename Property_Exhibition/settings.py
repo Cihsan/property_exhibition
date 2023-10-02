@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     "dashboard",
     "accounts",
     "all_property",
-    # "crispy_forms",
-    # "crispy_tailwind",
+    "crispy_forms",
+    "crispy_tailwind",
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
