@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "dashboard",
     "accounts",
     "all_property",
+    "about_and_contact",
     
 ]
 

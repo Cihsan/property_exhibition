@@ -9,4 +9,5 @@ urlpatterns = [
     path("", include("accounts.urls")),
     path("all_property/", include("all_property.urls")),
     path("dashboard/", include("dashboard.urls")),
+    path("",include("about_and_contact.urls")),
 ]

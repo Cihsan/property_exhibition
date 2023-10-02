@@ -1,0 +1,107 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block body %}
+
+<div class="">
+    <section class=" flex mt-16  w-full  justify-center">
+        <div class="w-11/12 flex justify-between border rounded-lg border-white  shadow bg-slate-600 shadow-gray-700 opacity-5">
+           <div class="flex">
+              <img class="rounded-l-lg h-60" src="{% static 'images/property.png'%}"/>
+              <div class="ml-6">
+                <h3 class="mb-12 text-3xl font-semibold">Property Exhibition</h3>
+                <p><span class="font-semibold text-xl text-inherit">Address :</span><span class="font-base ml-3 text-xl text-black">Madison St</span></p>
+                <p><span class="font-semibold mt-2 text-xl text-inherit">Emil :</span><span class="font-base ml-3 text-xl text-black">nazrulislamsuton06@gmail.com</span></p>
+                <p><span class="font-semibold mt-2 text-xl text-inherit">Mobile :</span><span class="font-base ml-3 text-xl text-black">01816249784</span></p>
+                <p><span class="font-semibold mt-3 text-xl text-inherit">Phone :</span><span class="font-base ml-3 text-xl text-black">01816249784</span></p>
+                <p><span class="font-semibold mt-3 text-xl text-inherit">Skype :</span><span class="font-base ml-3 text-xl text-black"> ourskypeoffice</span></p>
+                <button href="{% url 'contact' %}" type="submit" class="text-white mt-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Contact Us</button>
+              </div>
+           </div>
+           <div class="p-12 py-15 mt-6">
+            <p><span class="font-semibold text-xl text-inherit">Website :</span><span class="font-base ml-3 text-xl text-black">Property_Exhibition.com</span></p>
+            <p><span class="font-semibold mt-2 text-xl text-inherit">We Speak :</span><span class="font-base ml-3 text-xl text-black"> English, French, Spanish, German</span></p>
+            <p><span class="font-semibold mt-2 text-xl text-inherit">Opening Hours :</span><span class="font-base ml-3 text-xl text-black">9AM - 5PM Monday - Friday</span></p>
+            <p><span class="font-semibold mt-3 text-xl text-inherit">License :</span><span class="font-base ml-3 text-xl text-black">990 009900 </span></p>
+            <p><span class="font-semibold mt-3 text-xl text-inherit">Our Taxes :</span><span class="font-base ml-3 text-xl text-black"> 9% of all transactions</span></p>
+           </div>
+        </div>
+    </section>
+    <section class="p-6 mt-16 flex justify-center">
+        <div class="w-4/5 p-10 text-center border border-lg shadow-xl shadow-xl">
+           <h2 class="text-center mb-6 text-black font-semibold text-3xl">About Us</h2>
+           <p class="text-center text-zinc-400">
+            Real estate is “property consisting of land and the 
+            buildings on it, along with its natural resources such as crops,
+             minerals or water; immovable property of this nature;
+              an interest vested in this (also) an item of real property,
+             (more generally) buildings or housing in general. Also: the business of real estate;
+              the profession of buying, selling, or renting land, buildings or housing.”[1] It is a legal term used in
+               jurisdictions whose legal system is derived from English common law, such as India, 
+            the United Kingdom, United States, Canada, Pakistan, Australia, and New Zealand.
+           </p>
+
+           <div class="flex justify-center mt-12">
+            <i class="fa-brands fa-facebook text-2xl cursor-pointer"></i>
+            <i class="fa-brands fa-twitter ml-3 text-2xl cursor-pointer"></i>
+            <i class="fa-brands fa-linkedin ml-3 text-2xl cursor-pointer"></i>
+            <i class="fa-brands fa-square-instagram ml-3 text-2xl cursor-pointer"></i>
+           </div>
+        </div>
+    </section>
+
+    <section class="mb-16 mt-16 flex justify-center">
+        <div class="w-4/5">
+            <h2 class="text-center mb-6 text-black font-semibold text-3xl">Our Team Members</h2>
+            <div class="flex justify-between">
+                   
+                <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div class="flex mt-6 px-10 flex-col items-center pb-10">
+                        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{% static '/images/testimonial-1.jpg'%}" alt="Bonnie image"/>
+                        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
+                        <span class="text-center text-sm text-gray-400 mt-3">
+                            Real estate is “property consisting of land and the 
+                            buildings on it, along with its natural resources such as crops
+                        </span>
+                    </div>
+                </div>
+                <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div class="flex mt-6 px-10 flex-col items-center pb-10">
+                        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{% static '/images/testimonial-1.jpg'%}" alt="Bonnie image"/>
+                        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
+                        <span class="text-center text-sm text-gray-400 mt-3">
+                            Real estate is “property consisting of land and the 
+                            buildings on it, along with its natural resources such as crops
+                        </span>
+                    </div>
+                </div>
+                <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div class="flex mt-6 px-10 flex-col items-center pb-10">
+                        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{% static '/images/testimonial-1.jpg'%}" alt="Bonnie image"/>
+                        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
+                        <span class="text-center text-sm text-gray-400 mt-3">
+                            Real estate is “property consisting of land and the 
+                            buildings on it, along with its natural resources such as crops
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="w-full mt-6 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="flex mt-6 px-10 flex-col items-center pb-10">
+                    <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{% static '/images/testimonial-1.jpg'%}" alt="Bonnie image"/>
+                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
+                    <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
+                    <span class="text-center text-sm text-gray-400 mt-3">
+                        Real estate is “property consisting of land and the 
+                        buildings on it, along with its natural resources such as crops
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
