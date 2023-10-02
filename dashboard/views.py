@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import EditProfileForm, TestimonialForm, PromotionForm
 from accounts.models import Account
-from .models import Testimonial
+from .models import Testimonial, Promotion
 
 
 # Create your views here.
@@ -63,4 +63,10 @@ def promotions(request):
             data.save()
             return redirect("promotions")
     form = PromotionForm()
-    return render(request, "promotions.html", {"form": form})
+    return render(request, "add_promotions.html", {"form": form})
+
+
+def all_promotions(request):
+    user = request.user
+    datas = Promotion.objects.filter(user=user)
+    return render(request, "all_promotions.html", {"datas": datas})
