@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     "accounts",
     "all_property",
     "about_and_contact",
-    
 ]
 
 NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"

@@ -3,9 +3,9 @@
 {% block body %}
 
 <div>
-    <div class="w-full h-auto bg-slate-500 flex justify-cneter">
-        <div class="w-4/5 mt-16 flex justify-cneter  ml-40">
-            <div class="w-3/5 bg-slate-50 p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div class="md:w-full h-auto bg-slate-500 md:flex md:justify-cneter">
+        <div class="sm:w-4/5 md:w-4/5 mt-16 md:flex md:justify-cneter md:ml-40">
+            <div class="md:w-3/5 bg-slate-50 p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <h5 class="mb-3 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Property Exhibition</h5>
                 <h6 class="mb-8 text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">Business Park Theale C1, Center Berkshire RS1, England</h6>
                 <p><span class="text-2xl text-slate-400">Phone: </span><span class="text-xl ml-3"> (305) 555-4446</span></p>
@@ -30,7 +30,7 @@
                  <img class="h-auto mt-6 max-w-full" src="{% static '/images/team-scaled.jpg'%}" alt="image description">
 
             </div>
-            <div class="w-2/5 h-3/6 ml-3 bg-slate-50 block p-6 bg-slate-50 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <div class="md:w-2/5 mt-6 md:mt-0 h-3/6 ml-3 bg-slate-50 block p-6 bg-slate-50 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <h5 class="mb-2 mt-6 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">How To Find Us</h5>
                 <p class="mt-16"><span class="text-xl p-2 bg-gray-300 border-pink-400 rounded-full  text-slate-400"><i class="fa-solid fa-phone"></i></span><span class="text-xl ml-3 font-semibold"> (305) 555-4446</span></p><br/>
                 <p class="mt-3"><span class="text-xl p-2 bg-gray-300 border-pink-400 rounded-full "><i class="fa-solid text-slate-400 fa-envelope"></i></span><span class="text-xl ml-3 font-semibold">nazrulislamsuton06@gmail.com</span></p><br/>
@@ -51,9 +51,9 @@
             </div>
         </div>
     </div>
-    <div class="w-full bg-slate-500 flex justify-cneter">
-        <div class="w-4/5 mt-16 flex justify-cneter  ml-40">
-            <div class="w-3/5 bg-slate-50 p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div class="w-full bg-slate-500 md:flex md:justify-cneter">
+        <div class="md:w-4/5 mt-16 md:flex md:justify-cneter  md:ml-40">
+            <div class="md:w-3/5 bg-slate-50 p-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                  <form>
                     <h5 class="text-2xl font-semibold mb-6">Contact Us</h5>
                      <div class="flex w-full">
@@ -74,7 +74,7 @@
                      <button type="submit" class="text-white mt-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                  </form>
             </div>
-            <div class="w-2/5 h-3/6 ml-3 bg-slate-50 block p-6 bg-slate-50 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <div class="md:w-2/5 h-3/6 mt-6 md:mt-0 ml-3 bg-slate-50 block p-6 bg-slate-50 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <h5 class="text-2xl mb-6 font-semibold">Latest Listing</h5>
                 <div class="flex">
                 <img width="100" class="rounded" src="{% static 'images/image-1.png'%}"/>
@@ -91,7 +91,9 @@
             </div>
         </div>
     </div>
-    {% include 'include/map.html' %}
+    <div class="md:ml-32 mt-6">
+        {% include 'include/map.html' %}
+    </div>
 </div>
 
 {% endblock %}
