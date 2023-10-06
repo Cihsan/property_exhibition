@@ -14,6 +14,12 @@ from accounts.models import Account
 from .models import Testimonial, Promotion
 
 
+# api
+from rest_framework import viewsets
+from .models import Testimonial
+from .serializers import TestimonialSerializer, PromotionSerializer
+
+
 # Create your views here.
 @login_required(login_url="login")
 def dashbaord_view(request):
@@ -143,3 +149,14 @@ def edit_property(request, id):
     }
 
     return render(request, "edit_property.html", context)
+
+
+# testimonial api view
+class TestimonialReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Testimonial.objects.all()
+    serializer_class = TestimonialSerializer
+
+
+class PromotionReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Promotion.objects.all()
+    serializer_class = PromotionSerializer

@@ -7,9 +7,13 @@ from django.conf.urls.static import static
 # for api
 from rest_framework import routers
 from all_property.views import PropertyViewSet
+from dashboard.views import TestimonialReadOnlyViewSet, PromotionReadOnlyViewSet
 
 router = routers.DefaultRouter()
 router.register(r"properties", PropertyViewSet)
+router.register(r"testimonials", TestimonialReadOnlyViewSet)
+router.register(r"promotions", PromotionReadOnlyViewSet)
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.home, name="home"),
