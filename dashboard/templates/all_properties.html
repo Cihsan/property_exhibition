@@ -25,186 +25,30 @@
             </tr>
         </thead>
         <tbody>
+            {% for property in properties %}
+
+
             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Luxury Penthouse
+                    {{property.title}}
                 </td>
                 <td class="px-6 py-4">
-                    Miami, FL
+                    {{property.address}}
                 </td>
                 <td class="px-6 py-4">
-                    Oceanfront penthouse with panoramic views.
+                    {{property.description}}
                 </td>
                 <td class="px-6 py-4">
-                    $4,500,000
+                    BDT {{property.price}}
                 </td>
                 <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
+                    <a href="{% url 'edit_property' property.id %}"
+                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
                     <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
                 </td>
             </tr>
-            <tr class="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    City Center Apartment
-                </td>
-                <td class="px-6 py-4">
-                    Chicago, IL
-                </td>
-                <td class="px-6 py-4">
-                    Spacious apartment in the heart of the city.
-                </td>
-                <td class="px-6 py-4">
-                    $1,200,000
-                </td>
-                <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
-                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Coastal Villa
-                </td>
-                <td class="px-6 py-4">
-                    Malibu, CA
-                </td>
-                <td class="px-6 py-4">
-                    Mediterranean-style villa with private beach access.
-                </td>
-                <td class="px-6 py-4">
-                    $6,800,000
-                </td>
-                <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
-                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
-                </td>
-            </tr>
-            <tr class="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Mountain Retreat
-                </td>
-                <td class="px-6 py-4">
-                    Aspen, CO
-                </td>
-                <td class="px-6 py-4">
-                    Cozy cabin nestled in the Rockies.
-                </td>
-                <td class="px-6 py-4">
-                    $950,000
-                </td>
-                <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
-                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Lakeside Cottage
-                </td>
-                <td class="px-6 py-4">
-                    Lake Tahoe, CA
-                </td>
-                <td class="px-6 py-4">
-                    Quaint cottage with lakefront access.
-                </td>
-                <td class="px-6 py-4">
-                    $1,500,000
-                </td>
-                <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
-                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
-                </td>
-            </tr>
-            <tr class="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Downtown Loft
-                </td>
-                <td class="px-6 py-4">
-                    San Francisco, CA
-                </td>
-                <td class="px-6 py-4">
-                    Modern loft in the bustling city center.
-                </td>
-                <td class="px-6 py-4">
-                    $1,750,000
-                </td>
-                <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
-                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Beachfront Villa
-                </td>
-                <td class="px-6 py-4">
-                    Honolulu, HI
-                </td>
-                <td class="px-6 py-4">
-                    Hawaiian paradise with stunning beach views.
-                </td>
-                <td class="px-6 py-4">
-                    $5,200,000
-                </td>
-                <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
-                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
-                </td>
-            </tr>
-            <tr class="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Country Estate
-                </td>
-                <td class="px-6 py-4">
-                    Nashville, TN
-                </td>
-                <td class="px-6 py-4">
-                    Equestrian estate with sprawling grounds.
-                </td>
-                <td class="px-6 py-4">
-                    $3,700,000
-                </td>
-                <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
-                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Lakefront Cabin
-                </td>
-                <td class="px-6 py-4">
-                    Lake Placid, NY
-                </td>
-                <td class="px-6 py-4">
-                    Rustic cabin with access to the lake.
-                </td>
-                <td class="px-6 py-4">
-                    $850,000
-                </td>
-                <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
-                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
-                </td>
-            </tr>
-            <tr class="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Mountain View Home
-                </td>
-                <td class="px-6 py-4">
-                    Boulder, CO
-                </td>
-                <td class="px-6 py-4">
-                    Contemporary home with stunning mountain views.
-                </td>
-                <td class="px-6 py-4">
-                    $2,300,000
-                </td>
-                <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> |
-                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
-                </td>
-            </tr>
+            {% endfor %}
+
         </tbody>
     </table>
 </div>

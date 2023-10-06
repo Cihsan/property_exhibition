@@ -8,6 +8,7 @@ from .views import (
     promotions,
     all_promotions,
     create_property,
+    edit_property,
 )
 
 urlpatterns = [
@@ -19,4 +20,5 @@ urlpatterns = [
     path("add-promotions", promotions, name="add_promotions"),
     path("promotions", all_promotions, name="promotions"),
     path("add-property", create_property, name="add_property"),
+    path("edit-property/<int:id>/", edit_property, name="edit_property"),
 ]

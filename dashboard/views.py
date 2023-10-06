@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from all_property.models import Property
 from .forms import (
     EditProfileForm,
+    EditPropertyImageFormSet,
     PropertyForm,
     PropertyImageFormSet,
     TestimonialForm,
@@ -41,7 +42,8 @@ def edit_profile(request):
 
 @login_required(login_url="login")
 def all_property_manage(request):
-    return render(request, "all_properties.html")
+    properties = Property.objects.all()
+    return render(request, "all_properties.html", {"properties": properties})
 
 
 @login_required(login_url="login")
@@ -80,6 +82,7 @@ def all_promotions(request):
     return render(request, "all_promotions.html", {"datas": datas})
 
 
+@login_required(login_url="login")
 def create_property(request):
     if request.method == "POST":
         property_form = PropertyForm(request.POST)
@@ -108,3 +111,35 @@ def create_property(request):
     }
 
     return render(request, "add_property.html", context)
+
+
+@login_required(login_url="login")
+def edit_property(request, id):
+    property_instance = get_object_or_404(Property, id=id)
+    image_formset = EditPropertyImageFormSet(
+        request.POST or None, request.FILES or None, instance=property_instance
+    )
+
+    if request.method == "POST":
+        property_form = PropertyForm(request.POST, instance=property_instance)
+
+        if property_form.is_valid() and image_formset.is_valid():
+            property_form.save()
+
+            if image_formset.has_changed():
+                for form in image_formset:
+                    if form.cleaned_data:
+                        image = form.save(commit=False)
+                        image.property = property_instance
+                        image.save()
+
+            return redirect("all_properties")
+    else:
+        property_form = PropertyForm(instance=property_instance)
+
+    context = {
+        "property_form": property_form,
+        "image_formset": image_formset,
+    }
+
+    return render(request, "edit_property.html", context)

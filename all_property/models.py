@@ -45,6 +45,9 @@ class Property(models.Model):
     def __str__(self):
         return self.title
 
+    def address(self):
+        return f"{self.district}, {self.division}"
+
 
 class PropertyImage(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)

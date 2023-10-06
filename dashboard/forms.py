@@ -65,3 +65,11 @@ PropertyImageFormSet = forms.inlineformset_factory(
     extra=4,
     can_delete=True,
 )
+
+EditPropertyImageFormSet = forms.inlineformset_factory(
+    Property,
+    PropertyImage,
+    form=PropertyImageForm,
+    extra=1,
+    can_delete=True,
+)
