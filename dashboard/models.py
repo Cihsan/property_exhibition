@@ -31,3 +31,5 @@ class Booking(models.Model):
         default="Pending",
     )
     created_at = models.DateTimeField(auto_now=True)
+
+

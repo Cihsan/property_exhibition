@@ -1,0 +1,70 @@
+1. make tuple for Division,District
+2. update model with some changes
+3. Polish own working page and views
+4. Add Data Entry in All property
+5. image url collection for specific category
+
+tuple type-> sell,rent 
+category -> Apartment, Offic, Duplex hous, Lan, Shopping mal, Sublet/roo, Residential plo, Commercial plo, Industry
+tuple -> Division,District
+
+bed
+bath
+
+
+py manage.py help
+
+Type 'manage.py help <subcommand>' for help on a specific subcommand.
+
+Available subcommands:
+
+[auth]
+    changepassword
+    createsuperuser
+
+[contenttypes]
+    remove_stale_contenttypes
+
+[django]
+    check
+    compilemessages
+    createcachetable
+    dbshell
+    diffsettings
+    dumpdata
+    flush
+    inspectdb
+    loaddata
+    makemessages
+    makemigrations
+    migrate
+    optimizemigration
+    sendtestemail
+    shell
+    showmigrations
+    sqlflush
+    sqlmigrate
+    sqlsequencereset
+    squashmigrations
+    startapp
+    startproject
+    test
+    testserver
+
+[sessions]
+    clearsessions
+
+[staticfiles]
+    collectstatic
+    findstatic
+    runserver
+
+
+keep backup sqlite data
+python manage.py dumpdata > data_backup.json
+
+delete sqlite
+rm db.sqlite3
+
+load backup sqlite data from json formet
+python manage.py loaddata data_backup.json

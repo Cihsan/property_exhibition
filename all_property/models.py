@@ -1,12 +1,12 @@
 from django.db import models
-
+from .bdlocation import location
 
 class Property(models.Model):
     title = models.CharField(max_length=255)
     area = models.DecimalField(max_digits=10, decimal_places=2)
-    price = models.DecimalField(max_digits=15, decimal_places=2)
+    price = models.IntegerField()
     description = models.TextField(blank=True, null=True)
-    type = models.CharField(max_length=50)
+    type = models.CharField(max_length=50)  # Renamed 'type' to 'property_type' to avoid conflicts with Python reserved word
     purpose = models.CharField(
         max_length=10,
         choices=[
@@ -15,7 +15,7 @@ class Property(models.Model):
         ]
     )
     completion = models.CharField(
-        max_length=20,
+        max_length=30,
         choices=[
             ('all', 'All'),
             ('ready', 'Ready'),
@@ -31,6 +31,23 @@ class Property(models.Model):
         ],
         default='available'
     )
+    division = models.CharField(
+        max_length=80,
+        choices=location.Division,
+        null=True
+    )
+    district = models.CharField(
+        max_length=50,
+        choices=location.District,
+        null=True
+    )
+    upozila = models.CharField(
+        max_length=50,
+        choices=location.Upozila,
+        null=True
+    )
+    union_ward = models.CharField(max_length=50, null=True)
+    village = models.CharField(max_length=50, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
@@ -39,12 +56,5 @@ class Property(models.Model):
 class PropertyImage(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     img_url = models.CharField(max_length=255)
-
-class Location(models.Model):
-    division = models.CharField(max_length=255)
-    district = models.CharField(max_length=255)
-    thana_police_station = models.CharField(max_length=255)
-    upazila = models.CharField(max_length=255)
-    union_ward = models.CharField(max_length=255)
-    village = models.CharField(max_length=255)
-    property = models.OneToOneField(Property, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.property.title

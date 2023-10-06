@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
 
-<div class="flex  items-center justify-center bg-white z-5">
+<div class="flex  items-center justify-center z-5">
     <div>
         <nav class="bg-white border-b border-gray-200 fixed z-30 w-full">
             <div class="px-3 py-3 lg:px-5 lg:pl-3 md:hidden">
@@ -54,7 +54,7 @@
                 </div>
             </div>
         </nav>
-        <div class="flex overflow-hidden bg-white pt-16">
+        <div class="flex overflow-hidden pt-8">
             <aside id="sidebar"
                 class="fixed hidden z-20 h-full top-0 left-0 pt-16 lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75"
                 aria-label="Sidebar">
@@ -226,7 +226,7 @@
                 </div>
             </aside>
             <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
-            <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64">
+            <div id="main-content" class="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-10">
                 <main>
                     <div class="pt-6 px-4">
                         {% block content %}
