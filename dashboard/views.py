@@ -1,6 +1,14 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .forms import EditProfileForm, TestimonialForm, PromotionForm
+
+from all_property.models import Property
+from .forms import (
+    EditProfileForm,
+    PropertyForm,
+    PropertyImageFormSet,
+    TestimonialForm,
+    PromotionForm,
+)
 from accounts.models import Account
 from .models import Testimonial, Promotion
 
@@ -70,3 +78,33 @@ def all_promotions(request):
     user = request.user
     datas = Promotion.objects.filter(user=user)
     return render(request, "all_promotions.html", {"datas": datas})
+
+
+def create_property(request):
+    if request.method == "POST":
+        property_form = PropertyForm(request.POST)
+        image_formset = PropertyImageFormSet(
+            request.POST, request.FILES, instance=Property()
+        )
+
+        if property_form.is_valid() and image_formset.is_valid():
+            property_instance = property_form.save()
+
+            for form in image_formset:
+                if form.cleaned_data:
+                    image = form.save(commit=False)
+                    image.property = property_instance
+                    image.save()
+
+            return redirect("dashboard")
+
+    else:
+        property_form = PropertyForm()
+        image_formset = PropertyImageFormSet(instance=Property())
+
+    context = {
+        "property_form": property_form,
+        "image_formset": image_formset,
+    }
+
+    return render(request, "add_property.html", context)

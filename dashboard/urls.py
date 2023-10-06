@@ -7,6 +7,7 @@ from .views import (
     add_testimonial,
     promotions,
     all_promotions,
+    create_property,
 )
 
 urlpatterns = [
@@ -17,4 +18,5 @@ urlpatterns = [
     path("testimonial", add_testimonial, name="testimonial"),
     path("add-promotions", promotions, name="add_promotions"),
     path("promotions", all_promotions, name="promotions"),
+    path("add-property", create_property, name="add_property"),
 ]
