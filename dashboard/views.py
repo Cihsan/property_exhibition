@@ -1,6 +1,9 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from all_property.models import Property
+
+from dashboard.forms import PromotionForm, PropertyForm, TestimonialForm
 
 
 from .models import Testimonial, Promotion, Favourites
@@ -84,28 +87,14 @@ def all_promotions(request):
 def create_property(request):
     if request.method == "POST":
         property_form = PropertyForm(request.POST)
-        image_formset = PropertyImageFormSet(
-            request.POST, request.FILES, instance=Property()
-        )
-
-        if property_form.is_valid() and image_formset.is_valid():
-            property_instance = property_form.save()
-
-            for form in image_formset:
-                if form.cleaned_data:
-                    image = form.save(commit=False)
-                    image.property = property_instance
-                    image.save()
-
+        if property_form.is_valid():
+            property_form.save()
             return redirect("dashboard")
-
     else:
         property_form = PropertyForm()
-        image_formset = PropertyImageFormSet(instance=Property())
 
     context = {
         "property_form": property_form,
-        "image_formset": image_formset,
     }
 
     return render(request, "add_property.html", context)
@@ -114,22 +103,12 @@ def create_property(request):
 @login_required(login_url="login")
 def edit_property(request, id):
     property_instance = get_object_or_404(Property, id=id)
-    image_formset = EditPropertyImageFormSet(
-        request.POST or None, request.FILES or None, instance=property_instance
-    )
 
     if request.method == "POST":
         property_form = PropertyForm(request.POST, instance=property_instance)
 
-        if property_form.is_valid() and image_formset.is_valid():
+        if property_form.is_valid():
             property_form.save()
-
-            if image_formset.has_changed():
-                for form in image_formset:
-                    if form.cleaned_data:
-                        image = form.save(commit=False)
-                        image.property = property_instance
-                        image.save()
 
             return redirect("all_properties")
     else:
@@ -137,7 +116,6 @@ def edit_property(request, id):
 
     context = {
         "property_form": property_form,
-        "image_formset": image_formset,
     }
 
     return render(request, "edit_property.html", context)
