@@ -1,26 +1,8 @@
 from django import forms
 from django.forms import ModelForm
-from accounts.models import Account
 from .models import Testimonial, Promotion
 from django.forms import modelformset_factory
 from all_property.models import Property, PropertyImage
-
-
-class EditProfileForm(ModelForm):
-    class Meta:
-        model = Account
-        fields = [
-            "first_name",
-            "last_name",
-            "username",
-            "email",
-            "phone_number",
-            "profile_picture",
-            "address",
-            "city",
-            "state",
-            "country",
-        ]
 
 
 class TestimonialForm(ModelForm):

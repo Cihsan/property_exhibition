@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import Account
+from django.contrib.auth.models import User
 from all_property.models import Property
 
 RATING = ((1, 1), (2, 2), (3, 3), (4, 4), (5, 5))
@@ -9,13 +9,13 @@ RATING = ((1, 1), (2, 2), (3, 3), (4, 4), (5, 5))
 
 class Favourites(models.Model):
     favourite_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
 
 
 class Testimonial(models.Model):
     testimonial_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     content = models.TextField(max_length=200)
     rating = models.IntegerField(choices=RATING, default=5)
@@ -26,7 +26,7 @@ class Testimonial(models.Model):
 
 class Booking(models.Model):
     booking_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     property = models.ForeignKey(Property, on_delete=models.CASCADE, blank=True)
     booking_date = models.DateTimeField()
     total_amount = models.IntegerField()
@@ -39,7 +39,7 @@ class Booking(models.Model):
 
 
 class Promotion(models.Model):
-    user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     promotion_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     property = models.ForeignKey(Property, on_delete=models.CASCADE)

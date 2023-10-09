@@ -1,49 +1,53 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import logout
+from django.shortcuts import redirect
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate, login
-from .models import Account
+from django.contrib.auth.views import LogoutView
+from .serializers import LoginSerializer, RegistrationSerializer
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
 
 
-# Create your views here.
-def register(request):
-    if request.method == "POST":
-        first_name = request.POST["first_name"]
-        last_name = request.POST["last_name"]
-        email = request.POST["email"]
-        username = email.split("@")[0]
-        password = request.POST["password"]
-        password_confirmation = request.POST["password_confirmation"]
-        user = Account.objects.create_user(
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            username=username,
-            password=password,
-        )
-        user.save()
-        return redirect("login")
-    return render(request, "register.html")
+class LoginAPIView(APIView):
+    permission_classes = [AllowAny]
 
+    def post(self, request):
+        serializer = LoginSerializer(data=request.data)
+        if serializer.is_valid():
+            username = serializer.validated_data["username"]
+            password = serializer.validated_data["password"]
 
-def update_profile(request):
-    return render(request, "update_profile.html")
+            user = authenticate(request, username=username, password=password)
 
-
-def user_login(request):
-    if request.method == "POST":
-        email = request.POST["email"]
-        password = request.POST["password"]
-        print(email, password)
-        user = authenticate(request, email=email, password=password)
-        print(user)
-        if user is not None:
-            login(request, user)
-            return redirect("dashboard")
+            if user is not None:
+                login(request, user)
+                token, created = Token.objects.get_or_create(user=user)
+                return Response({"token": token.key}, status=status.HTTP_200_OK)
+            else:
+                return Response(
+                    {"error": "Invalid credentials"},
+                    status=status.HTTP_401_UNAUTHORIZED,
+                )
         else:
-            redirect("login")
-    return render(request, "signin.html")
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def user_logout(request):
-    logout(request)
-    return redirect("login")
+class RegistrationAPIView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = RegistrationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"message": "User registered successfully"},
+                status=status.HTTP_201_CREATED,
+            )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserLogout(LogoutView):
+    pass

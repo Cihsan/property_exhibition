@@ -1,23 +1,23 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from all_property.models import Property
 from .forms import (
-    EditProfileForm,
     EditPropertyImageFormSet,
     PropertyForm,
     PropertyImageFormSet,
     TestimonialForm,
     PromotionForm,
 )
-from accounts.models import Account
-from .models import Testimonial, Promotion
+
+from .models import Testimonial, Promotion, Favourites
 
 
 # api
 from rest_framework import viewsets
 from .models import Testimonial
-from .serializers import TestimonialSerializer, PromotionSerializer
+from .serializers import TestimonialSerializer, PromotionSerializer, FavouriteSerializer
 
 
 # Create your views here.
@@ -33,15 +33,15 @@ def user_profile(request):
 
 @login_required(login_url="login")
 def edit_profile(request):
-    user = Account.objects.get(email=request.user)
+    user = User.objects.get(email=request.user)
 
     if request.method == "POST":
-        form = EditProfileForm(request.POST, instance=user)
+        form = PromotionForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
             return redirect("user_profile")
     else:
-        form = EditProfileForm(instance=user)
+        form = PromotionForm(instance=user)
 
     return render(request, "edit_profile.html", {"form": form})
 
@@ -152,11 +152,16 @@ def edit_property(request, id):
 
 
 # testimonial api view
-class TestimonialReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
+class TestimonialViewSet(viewsets.ModelViewSet):
     queryset = Testimonial.objects.all()
     serializer_class = TestimonialSerializer
 
 
-class PromotionReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
+class PromotionViewSet(viewsets.ModelViewSet):
     queryset = Promotion.objects.all()
     serializer_class = PromotionSerializer
+
+
+class FavouriteViewSet(viewsets.ModelViewSet):
+    queryset = Favourites.objects.all()
+    serializer_class = FavouriteSerializer

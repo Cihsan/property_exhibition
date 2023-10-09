@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Testimonial, Promotion
+from .models import Testimonial, Promotion, Favourites
 
 
 class TestimonialSerializer(serializers.ModelSerializer):
@@ -11,4 +11,10 @@ class TestimonialSerializer(serializers.ModelSerializer):
 class PromotionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Promotion
+        fields = "__all__"
+
+
+class FavouriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Favourites
         fields = "__all__"

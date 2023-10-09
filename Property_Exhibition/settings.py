@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-i7$p%fy4f5#%q5rg_epai(mv(7ld-y%$rh3$*7*-_4w1ra4z!o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_tailwind",
     "rest_framework",
+    "rest_framework.authtoken",
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
@@ -115,8 +116,12 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-AUTH_USER_MODEL = "accounts.Account"
-
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+    ),
+}
+LOGOUT_REDIRECT_URL = "/login/"
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
