@@ -35,7 +35,7 @@ class Property(models.Model):
     )
     division = models.CharField(max_length=80, choices=location.Division, null=True)
     district = models.CharField(max_length=50, choices=location.District, null=True)
-    upozila = models.CharField(max_length=50, choices=location.Upozila, null=True)
+    upozila = models.CharField(max_length=50, null=True)
     img_url = models.URLField(max_length=300, null=True)
     union_ward = models.CharField(max_length=50, null=True)
     village = models.CharField(max_length=50, null=True)
