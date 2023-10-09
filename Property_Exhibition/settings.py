@@ -69,6 +69,14 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://domain.com",
+    "https://api.domain.com",
+    "http://localhost",
+    "http://127.0.0.1:9000",
+    "http://localhost:5173",
+]
 CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = "Property_Exhibition.urls"
 
