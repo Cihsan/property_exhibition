@@ -8,30 +8,30 @@ class Property(models.Model):
     area = models.DecimalField(max_digits=10, decimal_places=2)
     price = models.IntegerField()
     description = models.TextField(blank=True, null=True)
-    property_type = models.CharField(max_length=50)
+    type = models.CharField(max_length=50)
     purpose = models.CharField(
         max_length=10,
         choices=[
-            ("sell", "Sell"),
-            ("rent", "Rent"),
+            ("Sell", "Sell"),
+            ("Rent", "Rent"),
         ],
     )
     completion = models.CharField(
         max_length=30,
         choices=[
-            ("all", "All"),
-            ("ready", "Ready"),
-            ("incomplete", "Incomplete"),
-            ("under_construction", "Under Construction"),
+            ("All", "All"),
+            ("Ready", "Ready"),
+            ("Incomplete", "Incomplete"),
+            ("Under Construction", "Under Construction"),
         ],
     )
     status = models.CharField(
         max_length=10,
         choices=[
-            ("booked", "Booked"),
-            ("available", "Available"),
+            ("Booked", "Booked"),
+            ("Available", "Available"),
         ],
-        default="available",
+        default="Available",
     )
     division = models.CharField(max_length=80, choices=location.Division, null=True)
     district = models.CharField(max_length=50, choices=location.District, null=True)
