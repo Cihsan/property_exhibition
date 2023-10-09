@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "crispy_tailwind",
     "rest_framework",
     "rest_framework.authtoken",
+    "corsheaders",
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
@@ -65,8 +66,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
-
+CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = "Property_Exhibition.urls"
 
 TEMPLATES = [
