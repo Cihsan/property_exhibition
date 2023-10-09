@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse
 
 # for api
 from rest_framework import viewsets
-from .models import Property, PropertyImage
+from .models import Property
 from .serializers import PropertySerializer
 from django.db.models import Prefetch
 

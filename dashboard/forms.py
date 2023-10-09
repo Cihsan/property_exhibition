@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from .models import Testimonial, Promotion
 from django.forms import modelformset_factory
-from all_property.models import Property, PropertyImage
+from all_property.models import Property
 
 
 class TestimonialForm(ModelForm):
@@ -27,31 +27,3 @@ class PropertyForm(forms.ModelForm):
     class Meta:
         model = Property
         fields = "__all__"
-
-
-class PropertyImageForm(forms.ModelForm):
-    class Meta:
-        model = PropertyImage
-        fields = ["image"]
-
-    def __init__(self, *args, **kwargs):
-        super(PropertyImageForm, self).__init__(*args, **kwargs)
-        self.fields["image"].widget.attrs.update({"class": "form-control"})
-        self.fields["image"].label = "Image"
-
-
-PropertyImageFormSet = forms.inlineformset_factory(
-    Property,
-    PropertyImage,
-    form=PropertyImageForm,
-    extra=4,
-    can_delete=True,
-)
-
-EditPropertyImageFormSet = forms.inlineformset_factory(
-    Property,
-    PropertyImage,
-    form=PropertyImageForm,
-    extra=1,
-    can_delete=True,
-)

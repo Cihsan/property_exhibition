@@ -2,14 +2,6 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from all_property.models import Property
-from .forms import (
-    EditPropertyImageFormSet,
-    PropertyForm,
-    PropertyImageFormSet,
-    TestimonialForm,
-    PromotionForm,
-)
 
 from .models import Testimonial, Promotion, Favourites
 
