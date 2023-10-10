@@ -1,5 +1,4 @@
 from django.db import models
-from .bdlocation import location
 
 
 class Property(models.Model):
@@ -9,32 +8,14 @@ class Property(models.Model):
     price = models.IntegerField()
     description = models.TextField(blank=True, null=True)
     type = models.CharField(max_length=50)
-    purpose = models.CharField(
-        max_length=10,
-        choices=[
-            ("Sell", "Sell"),
-            ("Rent", "Rent"),
-        ],
-    )
-    completion = models.CharField(
-        max_length=30,
-        choices=[
-            ("All", "All"),
-            ("Ready", "Ready"),
-            ("Incomplete", "Incomplete"),
-            ("Under Construction", "Under Construction"),
-        ],
-    )
+    purpose = models.CharField(max_length=10, default="Sell")
+    completion = models.CharField(max_length=30, default="Ready")
     status = models.CharField(
         max_length=10,
-        choices=[
-            ("Booked", "Booked"),
-            ("Available", "Available"),
-        ],
         default="Available",
     )
-    division = models.CharField(max_length=80, choices=location.Division, null=True)
-    district = models.CharField(max_length=50, choices=location.District, null=True)
+    division = models.CharField(max_length=80, null=True)
+    district = models.CharField(max_length=50, null=True)
     upozila = models.CharField(max_length=50, null=True)
     img_url = models.URLField(max_length=300, null=True)
     union_ward = models.CharField(max_length=50, null=True)
