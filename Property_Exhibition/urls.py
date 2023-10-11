@@ -11,7 +11,7 @@ from accounts.views import (
     LoginAPIView,
     RegistrationAPIView,
     UserLogout,
-    UserProfileView,
+    UserProfileViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -19,6 +19,7 @@ router.register(r"property", PropertyViewSet)
 router.register(r"testimonials", TestimonialViewSet)
 router.register(r"promotions", PromotionViewSet)
 router.register(r"favourite", FavouriteViewSet)
+router.register(r"users", UserProfileViewSet, basename="users")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -26,8 +27,6 @@ urlpatterns = [
     path("login/", LoginAPIView.as_view(), name="login"),
     path("register/", RegistrationAPIView.as_view(), name="register"),
     path("logout", UserLogout.as_view(), name="logout"),
-    path("users", UserProfileView.as_view(), name="users"),
-    # path("favourite", FavouriteViewSet.as_view(), name="favourite"),
     # all api
     path("", include(router.urls)),
 ]

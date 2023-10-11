@@ -14,7 +14,7 @@ from .serializers import (
 )
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
-from .models import UserProfile, User
+from .models import UserProfile
 
 
 class LoginAPIView(APIView):
@@ -60,25 +60,12 @@ class UserLogout(LogoutView):
     pass
 
 
-class UserProfileView(APIView):
+class UserProfileViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
+    serializer_class = UserProfileSerializer
 
-    def get(self, requset):
-        user_profile = UserProfile.objects.get(user=requset.user)
-        serializer = UserProfileSerializer(user_profile)
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializer = UserProfileSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=201)
-        return Response(serializer.errors, status=400)
-
-    def put(self, request):
-        user_profile = UserProfile.objects.get(user=request.user)
-        serializer = UserProfileSerializer(user_profile, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=400)
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return UserProfile.objects.filter(user=self.request.user)
+        else:
+            return UserProfile.objects.none()
