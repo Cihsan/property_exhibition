@@ -7,7 +7,12 @@ from django.conf.urls.static import static
 from rest_framework import routers
 from dashboard.views import TestimonialViewSet, PromotionViewSet, FavouriteViewSet
 from all_property.views import PropertyViewSet
-from accounts.views import LoginAPIView, RegistrationAPIView, UserLogout
+from accounts.views import (
+    LoginAPIView,
+    RegistrationAPIView,
+    UserLogout,
+    UserProfileView,
+)
 
 router = routers.DefaultRouter()
 router.register(r"property", PropertyViewSet)
@@ -21,6 +26,7 @@ urlpatterns = [
     path("login/", LoginAPIView.as_view(), name="login"),
     path("register/", RegistrationAPIView.as_view(), name="register"),
     path("logout", UserLogout.as_view(), name="logout"),
+    path("users", UserProfileView.as_view(), name="users"),
     # path("favourite", FavouriteViewSet.as_view(), name="favourite"),
     # all api
     path("", include(router.urls)),

@@ -1,14 +1,20 @@
 from django.shortcuts import redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LogoutView
-from .serializers import LoginSerializer, RegistrationSerializer
+from .serializers import (
+    LoginSerializer,
+    RegistrationSerializer,
+    UserSerializer,
+    UserProfileSerializer,
+)
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
+from .models import UserProfile, User
 
 
 class LoginAPIView(APIView):
@@ -41,7 +47,8 @@ class RegistrationAPIView(APIView):
     def post(self, request):
         serializer = RegistrationSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            user = serializer.save()
+            UserProfile.objects.create(user=user)
             return Response(
                 {"message": "User registered successfully"},
                 status=status.HTTP_201_CREATED,
@@ -51,3 +58,27 @@ class RegistrationAPIView(APIView):
 
 class UserLogout(LogoutView):
     pass
+
+
+class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, requset):
+        user_profile = UserProfile.objects.get(user=requset.user)
+        serializer = UserProfileSerializer(user_profile)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = UserProfileSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+    def put(self, request):
+        user_profile = UserProfile.objects.get(user=request.user)
+        serializer = UserProfileSerializer(user_profile, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
