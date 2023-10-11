@@ -35,6 +35,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer()
+    current_address = serializers.CharField(read_only=True)
 
     class Meta:
         model = UserProfile
