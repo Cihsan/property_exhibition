@@ -14,6 +14,9 @@ from accounts.views import (
     UserProfileViewSet,
 )
 
+# all user
+from accounts.views import AllUsersListView, AllUserDetailView
+
 router = routers.DefaultRouter()
 router.register(r"property", PropertyViewSet)
 router.register(r"testimonials", TestimonialViewSet)
@@ -29,6 +32,9 @@ urlpatterns = [
     path("logout", UserLogout.as_view(), name="logout"),
     # all api
     path("", include(router.urls)),
+    # all user
+    path("alluser", AllUsersListView.as_view(), name="alluser"),
+    path("alluser/<int:id>/", AllUserDetailView.as_view(), name="alluser_detail"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
