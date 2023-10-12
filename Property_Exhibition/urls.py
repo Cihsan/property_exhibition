@@ -10,9 +10,10 @@ from all_property.views import PropertyViewSet
 from accounts.views import (
     LoginAPIView,
     RegistrationAPIView,
-    UserLogout,
+    LogoutView,
     UserProfileViewSet,
 )
+
 
 # all user
 from accounts.views import AllUsersListView, AllUserDetailView
@@ -29,7 +30,7 @@ urlpatterns = [
     path("dashboard/", include("dashboard.urls")),
     path("login/", LoginAPIView.as_view(), name="login"),
     path("register/", RegistrationAPIView.as_view(), name="register"),
-    path("logout", UserLogout.as_view(), name="logout"),
+    path("logout", LogoutView.as_view(), name="logout"),
     # all api
     path("", include(router.urls)),
     # all user

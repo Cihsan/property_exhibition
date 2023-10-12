@@ -4,8 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.views import LogoutView
+from django.contrib.auth import authenticate, login, logout
 from .serializers import (
     LoginSerializer,
     RegistrationSerializer,
@@ -43,6 +42,22 @@ class LoginAPIView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class LogoutView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        try:
+            token = Token.objects.get(user=request.user)
+            token.delete()
+            return Response(
+                {"detail": "Successfully logged out."}, status=status.HTTP_200_OK
+            )
+        except Token.DoesNotExist:
+            return Response(
+                {"detail": "Token does not exist."}, status=status.HTTP_404_NOT_FOUND
+            )
+
+
 class RegistrationAPIView(APIView):
     permission_classes = [AllowAny]
 
@@ -56,10 +71,6 @@ class RegistrationAPIView(APIView):
                 status=status.HTTP_201_CREATED,
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class UserLogout(LogoutView):
-    pass
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
