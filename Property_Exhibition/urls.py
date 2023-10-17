@@ -45,7 +45,7 @@ urlpatterns = [
     path("alluser", AllUsersListView.as_view(), name="alluser"),
     path("alluser/<int:id>/", AllUserDetailView.as_view(), name="alluser_detail"),
     path("alluser/delete/<int:id>", DeleteUserView.as_view(), name="user_delete"),
-    path("payment/", payments_view, name="payment"),
+    # path("payment/", payments_view, name="payment"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
