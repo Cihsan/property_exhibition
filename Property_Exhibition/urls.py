@@ -12,6 +12,7 @@ from accounts.views import (
     RegistrationAPIView,
     LogoutView,
     UserProfileViewSet,
+    DeleteUserView,
 )
 
 
@@ -36,6 +37,7 @@ urlpatterns = [
     # all user
     path("alluser", AllUsersListView.as_view(), name="alluser"),
     path("alluser/<int:id>/", AllUserDetailView.as_view(), name="alluser_detail"),
+    path("alluser/delete/<int:id>", DeleteUserView.as_view(), name="user_delete"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -15,7 +15,8 @@ from django.http import Http404, JsonResponse
 from django.middleware.csrf import get_token
 from .models import UserProfile
 from .permissions import IsOwnerOnly
-from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView, DestroyAPIView
+from django.contrib.auth.models import User
 
 
 class LoginAPIView(APIView):
@@ -102,3 +103,10 @@ class AllUserDetailView(RetrieveUpdateAPIView):
 
     def get_queryset(self):
         return UserProfile.objects.all()
+
+
+class DeleteUserView(DestroyAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAdminUser]
+    queryset = User.objects.all()
+    lookup_field = "id"
