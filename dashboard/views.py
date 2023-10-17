@@ -5,14 +5,19 @@ from all_property.models import Property
 
 from dashboard.forms import PromotionForm, PropertyForm, TestimonialForm
 
-
-from .models import Testimonial, Promotion, Favourites
-
+from .models import Testimonial, Promotion, Favourites, Booking
 
 # api
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
+from rest_framework.authentication import TokenAuthentication
 from .models import Testimonial
-from .serializers import TestimonialSerializer, PromotionSerializer, FavouriteSerializer
+from .serializers import (
+    TestimonialSerializer,
+    PromotionSerializer,
+    FavouriteSerializer,
+    BookingSerializer,
+)
+from accounts.permissions import IsOwnerOnly
 
 
 # Create your views here.
@@ -135,3 +140,11 @@ class PromotionViewSet(viewsets.ModelViewSet):
 class FavouriteViewSet(viewsets.ModelViewSet):
     queryset = Favourites.objects.all()
     serializer_class = FavouriteSerializer
+
+
+class BookingsViewSet(viewsets.ModelViewSet):
+    serializer_class = BookingSerializer
+    permission_classes = [IsOwnerOnly, permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Booking.objects.filter(user=self.request.user)

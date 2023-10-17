@@ -5,7 +5,12 @@ from django.conf.urls.static import static
 
 # for api
 from rest_framework import routers
-from dashboard.views import TestimonialViewSet, PromotionViewSet, FavouriteViewSet
+from dashboard.views import (
+    TestimonialViewSet,
+    PromotionViewSet,
+    FavouriteViewSet,
+    BookingsViewSet,
+)
 from all_property.views import PropertyViewSet
 from accounts.views import (
     LoginAPIView,
@@ -25,6 +30,7 @@ router.register(r"testimonials", TestimonialViewSet)
 router.register(r"promotions", PromotionViewSet)
 router.register(r"favourite", FavouriteViewSet)
 router.register(r"users", UserProfileViewSet, basename="users")
+router.register(r"bookings", BookingsViewSet, basename="bookings")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
