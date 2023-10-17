@@ -28,7 +28,7 @@ class Booking(models.Model):
     booking_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     property = models.ForeignKey(Property, on_delete=models.CASCADE, blank=True)
-    booking_date = models.DateTimeField()
+    booking_date = models.DateField()
     total_amount = models.IntegerField()
     payment_status = models.CharField(
         max_length=9,
@@ -36,6 +36,9 @@ class Booking(models.Model):
         default="Pending",
     )
     created_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return f"{self.user}, {self.property}"
 
 
 class Promotion(models.Model):
