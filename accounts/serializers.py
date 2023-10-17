@@ -30,7 +30,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("first_name", "last_name", "username", "email", "is_superuser")
-        read_only_fields = ("username", "email", "is_superuser")
+        read_only_fields = ("username", "email")
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -63,6 +63,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
         user.first_name = user_data.get("first_name", user.first_name)
         user.last_name = user_data.get("last_name", user.last_name)
+        user.is_superuser = user_data.get("is_superuser", user.is_superuser)
         user.save()
 
         instance.save()
