@@ -1,4 +1,7 @@
 from decimal import Decimal
+import random
+import string
+import json
 from django.http import JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -20,8 +23,7 @@ from .serializers import (
     BookingSerializer,
 )
 from accounts.permissions import IsOwnerOnly
-
-# from pysslcmz.payment import SSLCSession
+from sslcommerz_lib import SSLCOMMERZ
 
 
 # testimonial api view
@@ -55,47 +57,62 @@ FAIL_URL = "http://localhost:5173/failed"
 CANCEL_URL = "http://localhost:5173/cancel"
 
 
-# def payments_view(request):
-#     if request.metod == "POST":
-#         user_id = request.POST.get("user")
-#         property_id = request.POST.get("property")
-#         user = User.objects.get(id=user_id)
-#         property = Property.objects.get(id=property_id)
-#         mypayment = SSLCSession(
-#             sslc_is_sandbox=True, sslc_store_id=Store_ID, sslc_store_pass=Store_Password
-#         )
-#         mypayment.set_urls(
-#             success_url=SUCCESS_URL,
-#             fail_url=FAIL_URL,
-#             cancel_url=CANCEL_URL,
-#             ipn_url="example.com/payment_notification",
-#         )
-#         mypayment.set_product_integration(
-#             total_amount=Decimal(property.price),
-#             currency="BDT",
-#             product_category=property.type,
-#             product_name=property.title,
-#             num_of_item=1,
-#             shipping_method="NO",
-#             product_profile="None",
-#         )
-#         mypayment.set_customer_info(
-#             name=user.first_name,
-#             email=user.email,
-#             address1=user.user_userprofile.current_address(),
-#             address2=user.user_userprofile.area,
-#             city=user.user_userprofile.city,
-#             postcode="0000",
-#             country="Bangladesh",
-#             phone=user.user_userprofile.contact_no,
-#         )
+def unique_trangection_id_generator(
+    size=10, chars=string.ascii_uppercase + string.digits
+):
+    return "".join(random.choice(chars) for _ in range(size))
 
-#         mypayment.set_shipping_info(
-#             shipping_to="demo customer",
-#             address="demo address",
-#             city="Dhaka",
-#             postcode="1209",
-#             country="Bangladesh",
-#         )
-#         response_data = mypayment.init_payment()
-#         return JsonResponse(response_data)
+
+def payment_view(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            print(data)
+            user_id = data.get("user")
+            property_id = data.get("property")
+            user = User.objects.get(id=user_id)
+            property = Property.objects.get(id=property_id)
+            print(user_id, property_id)
+            settings = {
+                "store_id": Store_ID,
+                "store_pass": Store_Password,
+                "issandbox": True,
+            }
+
+            sslcommez = SSLCOMMERZ(settings)
+            post_body = {}
+            post_body["total_amount"] = (Decimal(property.price),)
+            post_body["currency"] = "BDT"
+            post_body["tran_id"] = unique_trangection_id_generator()
+            post_body["success_url"] = SUCCESS_URL
+            post_body["fail_url"] = FAIL_URL
+            post_body["cancel_url"] = CANCEL_URL
+            post_body["emi_option"] = 0
+            post_body[
+                "cus_email"
+            ] = user.email  # Retrieve email from the current user session
+            post_body["cus_phone"] = (
+                user.userprofile.contact_no or "0123456789"
+            )  # Retrieve phone from the current user session
+            post_body[
+                "cus_add1"
+            ] = (
+                user.userprofile.current_address()
+            )  # Retrieve address from the current user session
+            post_body["cus_city"] = (
+                user.userprofile.city or "Not given"
+            )  # Retrieve city from the current user session
+            post_body["cus_country"] = "Bangladesh"
+            post_body["shipping_method"] = "NO"
+            post_body["multi_card_name"] = ""
+            post_body["num_of_item"] = 1
+            post_body["product_name"] = property.title
+            post_body["product_category"] = property.type
+            post_body["product_profile"] = "RealEstate"
+
+            # OPTIONAL PARAMETERS
+            response = sslcommez.createSession(post_body)
+            # print(response)
+            return JsonResponse(response)
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON data"}, status=400)
