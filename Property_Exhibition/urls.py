@@ -11,7 +11,6 @@ from dashboard.views import (
     FavouriteViewSet,
     BookingsViewSet,
     payment_view,
-    get_csrf_token,
 )
 from all_property.views import PropertyViewSet
 from accounts.views import (
@@ -47,7 +46,6 @@ urlpatterns = [
     path("alluser/<int:id>/", AllUserDetailView.as_view(), name="alluser_detail"),
     path("alluser/delete/<int:id>", DeleteUserView.as_view(), name="user_delete"),
     path("payment/", payment_view, name="payment"),
-    path("csrf", get_csrf_token, name="csrf_token"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

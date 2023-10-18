@@ -116,11 +116,3 @@ def payment_view(request):
             return JsonResponse(response)
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON data"}, status=400)
-
-
-from django.middleware.csrf import get_token
-
-
-def get_csrf_token(request):
-    csrf_token = get_token(request)
-    return JsonResponse({"csrf": csrf_token})
