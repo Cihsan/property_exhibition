@@ -10,7 +10,7 @@ from dashboard.views import (
     PromotionViewSet,
     FavouriteViewSet,
     BookingsViewSet,
-    payments_view,
+    # payments_view,
 )
 from all_property.views import PropertyViewSet
 from accounts.views import (
