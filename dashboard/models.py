@@ -12,6 +12,9 @@ class Favourites(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
 
+    class Meta:
+        unique_together = ("user", "property")
+
 
 class Testimonial(models.Model):
     testimonial_id = models.AutoField(primary_key=True)
