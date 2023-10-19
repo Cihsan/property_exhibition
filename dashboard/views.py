@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from all_property.models import Property
 
-from dashboard.forms import PromotionForm, PropertyForm, TestimonialForm
 
 from .models import Testimonial, Promotion, Favourites, Booking
 
@@ -52,7 +51,7 @@ class BookingsViewSet(viewsets.ModelViewSet):
 
 Store_ID = "prope652e86dbd1b13"
 Store_Password = "prope652e86dbd1b13@ssl"
-SUCCESS_URL = "http://localhost:5173/success"
+SUCCESS_URL = "https://property-exhibition.onrender.com/success"
 FAIL_URL = "http://localhost:5173/failed"
 CANCEL_URL = "http://localhost:5173/cancel"
 
@@ -97,8 +96,26 @@ def payment_view(request):
             post_body["product_name"] = property.title
             post_body["product_category"] = property.type
             post_body["product_profile"] = "RealEstate"
-
             response = sslcommez.createSession(post_body)
+            booking_order = Booking.objects.create(
+                user=user,
+                property=property,
+                total_amount=int(property.price),
+                trans_id=post_body["tran_id"],
+                payment_status="Pending",
+            )
+            booking_order.save()
             return JsonResponse(response)
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON data"}, status=400)
+
+
+def complete_transaction(request, tran_id):
+    print(tran_id)
+    booking = Booking.objects.get(trans_id=tran_id)
+    if booking is not None:
+        booking.payment_status = "Completed"
+        booking.save()
+        return redirect("https://property-exhibition.netlify.app/")
+    else:
+        return JsonResponse("Something went wrong")

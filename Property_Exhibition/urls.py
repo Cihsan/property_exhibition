@@ -11,6 +11,7 @@ from dashboard.views import (
     FavouriteViewSet,
     BookingsViewSet,
     payment_view,
+    complete_transaction,
 )
 from all_property.views import PropertyViewSet
 from accounts.views import (
@@ -46,6 +47,7 @@ urlpatterns = [
     path("alluser/<int:id>/", AllUserDetailView.as_view(), name="alluser_detail"),
     path("alluser/delete/<int:id>", DeleteUserView.as_view(), name="user_delete"),
     path("payment/", payment_view, name="payment"),
+    path("success/<str:tran_id>", complete_transaction, name="complete_transaction"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

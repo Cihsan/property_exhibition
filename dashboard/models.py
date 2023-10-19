@@ -28,11 +28,12 @@ class Booking(models.Model):
     booking_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     property = models.ForeignKey(Property, on_delete=models.CASCADE, blank=True)
-    booking_date = models.DateField()
+    booking_date = models.DateField(auto_now_add=True)
     total_amount = models.IntegerField()
+    trans_id = models.CharField(max_length=15, null=True)
     payment_status = models.CharField(
         max_length=9,
-        choices=[("Pending", "Pending"), ("Completed", "Completed")],
+        choices=(("Pending", "Pending"), ("Completed", "Completed")),
         default="Pending",
     )
     created_at = models.DateTimeField(auto_now=True)
