@@ -36,7 +36,11 @@ class LoginAPIView(APIView):
 
                 token, created = Token.objects.get_or_create(user=user)
                 return Response(
-                    {"token": token.key, "profile_id": user_profile.id},
+                    {
+                        "token": token.key,
+                        "profile_id": user_profile.id,
+                        "user_id": user.id,
+                    },
                     status=status.HTTP_200_OK,
                 )
             else:
