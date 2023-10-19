@@ -77,7 +77,7 @@ Store_ID = "prope652e86dbd1b13"
 Store_Password = "prope652e86dbd1b13@ssl"
 SUCCESS_URL = "https://property-exhibition.onrender.com/success"
 FAIL_URL = "http://localhost:5173/failed"
-CANCEL_URL = "http://localhost:5173/cancel"
+CANCEL_URL = "https://property-exhibition.onrender.com/cancel"
 
 
 def unique_trangection_id_generator(
@@ -135,11 +135,20 @@ def payment_view(request):
 
 
 def complete_transaction(request, tran_id):
-    print(tran_id)
     booking = Booking.objects.get(trans_id=tran_id)
     if booking is not None:
         booking.payment_status = "Completed"
         booking.save()
-        return redirect("https://property-exhibition.netlify.app/")
+        return redirect("http://localhost:5173/")
+    else:
+        return JsonResponse("Something went wrong")
+
+
+def cancel_transaction(request, tran_id):
+    booking = Booking.objects.get(trans_id=tran_id)
+    if booking is not None:
+        booking.payment_status = "Canceled"
+        booking.save()
+        return redirect("http://localhost:5173/property/")
     else:
         return JsonResponse("Something went wrong")

@@ -36,7 +36,11 @@ class Booking(models.Model):
     trans_id = models.CharField(max_length=15, null=True)
     payment_status = models.CharField(
         max_length=9,
-        choices=(("Pending", "Pending"), ("Completed", "Completed")),
+        choices=(
+            ("Pending", "Pending"),
+            ("Completed", "Completed"),
+            ("Canceled", "Canceled"),
+        ),
         default="Pending",
     )
     created_at = models.DateTimeField(auto_now=True)
