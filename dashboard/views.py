@@ -40,6 +40,9 @@ class FavouriteViewSet(viewsets.ModelViewSet):
     queryset = Favourites.objects.all()
     serializer_class = FavouriteSerializer
 
+    def get_queryset(self):
+        return Favourites.objects.filter(user=self.request.user)
+
 
 class BookingsViewSet(viewsets.ModelViewSet):
     serializer_class = BookingSerializer
