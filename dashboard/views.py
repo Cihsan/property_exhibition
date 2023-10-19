@@ -6,6 +6,8 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from rest_framework.response import Response
+from rest_framework import status
 from all_property.models import Property
 
 
@@ -34,6 +36,15 @@ class TestimonialViewSet(viewsets.ModelViewSet):
 class PromotionViewSet(viewsets.ModelViewSet):
     queryset = Promotion.objects.all()
     serializer_class = PromotionSerializer
+
+    def create(self, request, *args, **kwargs):
+        property_id = request.data.get("property")
+        if Promotion.objects.filter(property=property_id).exists():
+            return Response(
+                {"error": "A promotion for this property already exists."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        return super(PromotionViewSet, self).create(request, *args, **kwargs)
 
 
 class FavouriteViewSet(viewsets.ModelViewSet):
