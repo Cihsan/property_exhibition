@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework import status
+from django.db import IntegrityError
 from all_property.models import Property
 
 
@@ -50,6 +51,15 @@ class PromotionViewSet(viewsets.ModelViewSet):
 class FavouriteViewSet(viewsets.ModelViewSet):
     queryset = Favourites.objects.all()
     serializer_class = FavouriteSerializer
+
+    def create(self, request, *args, **kwargs):
+        try:
+            return super().create(request, *args, **kwargs)
+        except IntegrityError:
+            return Response(
+                {"error": "This combination already exists."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
     def get_queryset(self):
         return Favourites.objects.filter(user=self.request.user)
