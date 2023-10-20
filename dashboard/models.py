@@ -56,3 +56,9 @@ class Promotion(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     start_date = models.DateField(blank=True)
     end_date = models.DateField(blank=True)
+
+
+class ContactUs(models.Model):
+    email = models.EmailField(max_length=200)
+    subject = models.CharField(max_length=255)
+    message = models.TextField()

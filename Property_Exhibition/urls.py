@@ -13,6 +13,7 @@ from dashboard.views import (
     payment_view,
     complete_transaction,
     cancel_transaction,
+    ContactUsViewSet,
 )
 from all_property.views import PropertyViewSet
 from accounts.views import (
@@ -34,6 +35,7 @@ router.register(r"promotions", PromotionViewSet)
 router.register(r"favourite", FavouriteViewSet)
 router.register(r"users", UserProfileViewSet, basename="users")
 router.register(r"bookings", BookingsViewSet, basename="bookings")
+router.register(r"contact", ContactUsViewSet, basename="contact")
 
 urlpatterns = [
     path("admin/", admin.site.urls),

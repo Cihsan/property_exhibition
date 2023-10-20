@@ -17,12 +17,13 @@ from .models import Testimonial, Promotion, Favourites, Booking
 # api
 from rest_framework import viewsets, permissions
 from rest_framework.authentication import TokenAuthentication
-from .models import Testimonial
+from .models import Testimonial, ContactUs
 from .serializers import (
     TestimonialSerializer,
     PromotionSerializer,
     FavouriteSerializer,
     BookingSerializer,
+    ContactUsSerializer,
 )
 from accounts.permissions import IsOwnerOnly
 from sslcommerz_lib import SSLCOMMERZ
@@ -152,3 +153,8 @@ def cancel_transaction(request, tran_id):
         return redirect("http://localhost:5173/property/")
     else:
         return JsonResponse("Something went wrong")
+
+
+class ContactUsViewSet(viewsets.ModelViewSet):
+    serializer_class = ContactUsSerializer
+    queryset = ContactUs.objects.all()
