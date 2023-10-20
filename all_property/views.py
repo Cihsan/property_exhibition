@@ -5,6 +5,7 @@ from rest_framework import viewsets
 from .models import Property
 from .serializers import PropertySerializer
 from django.db.models import Prefetch
+from dashboard.models import Promotion
 
 
 # Create your views here.
@@ -13,7 +14,7 @@ def propertylist(request):
 
 
 # property api
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from .models import Property
 from .serializers import PropertySerializer
 from rest_framework.pagination import PageNumberPagination
@@ -44,7 +45,3 @@ class PropertyViewSet(viewsets.ModelViewSet):
             queryset = queryset.order_by("-area_field")
 
         return queryset
-
-
-def detailproperty(request):
-    return render(request, "detail.html")
