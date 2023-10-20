@@ -77,7 +77,7 @@ class BookingsViewSet(viewsets.ModelViewSet):
 Store_ID = "prope652e86dbd1b13"
 Store_Password = "prope652e86dbd1b13@ssl"
 SUCCESS_URL = "https://property-exhibition.onrender.com/success"
-FAIL_URL = "http://localhost:5173/failed"
+FAIL_URL = "https://property-exhibition.netlify.app/contact"
 CANCEL_URL = "https://property-exhibition.onrender.com/cancel"
 
 
@@ -140,7 +140,7 @@ def complete_transaction(request, tran_id):
     if booking is not None:
         booking.payment_status = "Completed"
         booking.save()
-        return redirect("http://localhost:5173/")
+        return redirect("https://property-exhibition.netlify.app/")
     else:
         return JsonResponse("Something went wrong")
 
@@ -150,7 +150,7 @@ def cancel_transaction(request, tran_id):
     if booking is not None:
         booking.payment_status = "Canceled"
         booking.save()
-        return redirect("http://localhost:5173/property/")
+        return redirect("https://property-exhibition.netlify.app/")
     else:
         return JsonResponse("Something went wrong")
 
