@@ -26,7 +26,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
     serializer_class = PropertySerializer
     pagination_class = PageNumberPagination
     filter_backends = [SearchFilter]
-    search_fields = ["name", "description", "other_fields_to_search"]
+    search_fields = ["name", "description"]
 
     def get_queryset(self):
         queryset = super().get_queryset()

@@ -25,6 +25,8 @@ class Property(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     likes = models.IntegerField(default=0)
+    image1 = models.URLField(null=True)
+    image2 = models.URLField(null=True)
 
     def __str__(self):
         return self.title
