@@ -63,15 +63,15 @@ class FavouriteViewSet(viewsets.ModelViewSet):
             )
 
     def get_queryset(self):
-        return Favourites.objects.filter(user=self.request.user)
+        return Favourites.objects.all()
 
 
 class BookingsViewSet(viewsets.ModelViewSet):
     serializer_class = BookingSerializer
-    permission_classes = [IsOwnerOnly, permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Booking.objects.filter(user=self.request.user)
+        return Booking.objects.all()
 
 
 Store_ID = "prope652e86dbd1b13"

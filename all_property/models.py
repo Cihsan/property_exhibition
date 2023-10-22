@@ -33,3 +33,8 @@ class Property(models.Model):
 
     def address(self):
         return f"{self.district}, {self.division}"
+
+
+class Property_Images(models.Model):
+    property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
+    url = models.URLField()

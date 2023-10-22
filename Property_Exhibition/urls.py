@@ -15,7 +15,7 @@ from dashboard.views import (
     cancel_transaction,
     ContactUsViewSet,
 )
-from all_property.views import PropertyViewSet
+from all_property.views import PropertyViewSet, PropertyImagesCreateView
 from accounts.views import (
     LoginAPIView,
     RegistrationAPIView,
@@ -52,6 +52,9 @@ urlpatterns = [
     path("payment/", payment_view, name="payment"),
     path("success/<str:tran_id>", complete_transaction, name="complete_transaction"),
     path("cancel/<str:tran_id>", cancel_transaction, name="cancel_transaction"),
+    path(
+        "property-images/", PropertyImagesCreateView.as_view(), name="property_images"
+    ),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
