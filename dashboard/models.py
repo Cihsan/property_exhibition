@@ -11,6 +11,7 @@ class Favourites(models.Model):
     favourite_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    created_at = models.DateField(auto_now=True)
 
     class Meta:
         unique_together = ("user", "property")
@@ -62,3 +63,4 @@ class ContactUs(models.Model):
     email = models.EmailField(max_length=200)
     subject = models.CharField(max_length=255)
     message = models.TextField()
+    created_at = models.DateField(auto_now=True)

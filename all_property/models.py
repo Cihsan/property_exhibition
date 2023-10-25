@@ -24,7 +24,6 @@ class Property(models.Model):
     village = models.CharField(max_length=50, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    likes = models.IntegerField(default=0)
     image1 = models.URLField(max_length=300, null=True)
     image2 = models.URLField(max_length=300, null=True)
 
@@ -33,8 +32,3 @@ class Property(models.Model):
 
     def address(self):
         return f"{self.district}, {self.division}"
-
-
-class Property_Images(models.Model):
-    property_id = models.ForeignKey(Property, on_delete=models.CASCADE)
-    url = models.URLField()
