@@ -29,8 +29,16 @@ class RegistrationSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "username", "email", "is_staff", "id")
-        read_only_fields = ("username", "email", "id")
+        fields = (
+            "first_name",
+            "last_name",
+            "username",
+            "email",
+            "is_staff",
+            "id",
+            "date_joined",
+        )
+        read_only_fields = ("username", "email", "id", "date_joined")
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -40,6 +48,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = "__all__"
+        read_only_fields = ("updated_at",)
 
     def update(self, instance, validated_data):
         instance.gender = validated_data.get("gender", instance.gender)
