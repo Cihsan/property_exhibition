@@ -132,21 +132,25 @@ def payment_view(request):
 
 
 def complete_transaction(request, tran_id):
+    data = json.loads(request.body)
+            origin = data.get("origin")
     booking = Booking.objects.get(trans_id=tran_id)
     if booking is not None:
         booking.payment_status = "Completed"
         booking.save()
-        return redirect("https://property-exhibition.netlify.app/")
+        return redirect(origin)
     else:
         return JsonResponse("Something went wrong")
 
 
 def cancel_transaction(request, tran_id):
+    data = json.loads(request.body)
+            origin = data.get("origin")
     booking = Booking.objects.get(trans_id=tran_id)
     if booking is not None:
         booking.payment_status = "Canceled"
         booking.save()
-        return redirect("https://property-exhibition.netlify.app/")
+        return redirect(origin)
     else:
         return JsonResponse("Something went wrong")
 
