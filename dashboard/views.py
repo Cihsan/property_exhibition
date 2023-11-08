@@ -100,8 +100,7 @@ def payment_view(request):
                 "store_pass": Store_Password,
                 "issandbox": True,
             }
-            data = json.loads(request.body)
-            origin = data.get("origin")
+            
             sslcommez = SSLCOMMERZ(settings)
             post_body = {}
             post_body["total_amount"] = (Decimal(property.price),)
@@ -109,16 +108,9 @@ def payment_view(request):
             transaction_id = unique_trangection_id_generator()
             post_body["tran_id"] = transaction_id
             
-            post_body["success_url"] = origin 
-            post_body["fail_url"] = origin 
-            post_body["cancel_url"] = origin
-            # post_body[origin] = SUCCESS_URL + "/" + transaction_id
-            # post_body[origin] = FAIL_URL + "/" + transaction_id
-            # post_body[origin] = CANCEL_URL + "/" + transaction_id
-            
-            # post_body[origin] = + "/success_url" + transaction_id
-            # post_body[origin] = + "/fail_url" + transaction_id
-            # post_body[origin] = + "/cancel_url" + transaction_id
+            post_body["success_url"] = SUCCESS_URL + "/" + transaction_id
+            post_body["fail_url"] = FAIL_URL + "/" + transaction_id
+            post_body["cancel_url"] = CANCEL_URL + "/" + transaction_id
             
             post_body["emi_option"] = 0
             post_body["cus_email"] = user.email
