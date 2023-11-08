@@ -133,7 +133,7 @@ def payment_view(request):
 
 def complete_transaction(request, tran_id):
     data = json.loads(request.body)
-            origin = data.get("origin")
+    origin = data.get("origin")
     booking = Booking.objects.get(trans_id=tran_id)
     if booking is not None:
         booking.payment_status = "Completed"
@@ -145,7 +145,7 @@ def complete_transaction(request, tran_id):
 
 def cancel_transaction(request, tran_id):
     data = json.loads(request.body)
-            origin = data.get("origin")
+    origin = data.get("origin")
     booking = Booking.objects.get(trans_id=tran_id)
     if booking is not None:
         booking.payment_status = "Canceled"
