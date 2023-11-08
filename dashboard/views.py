@@ -109,9 +109,9 @@ def payment_view(request):
             transaction_id = unique_trangection_id_generator()
             post_body["tran_id"] = transaction_id
             
-            post_body["success_url"] = origin + "/success_url/" + transaction_id
-            post_body["fail_url"] = origin + "/fail_url/" + transaction_id
-            post_body["cancel_url"] = origin + "/cancel_url/" + transaction_id
+            post_body["success_url"] = origin 
+            post_body["fail_url"] = origin 
+            post_body["cancel_url"] = origin
             # post_body[origin] = SUCCESS_URL + "/" + transaction_id
             # post_body[origin] = FAIL_URL + "/" + transaction_id
             # post_body[origin] = CANCEL_URL + "/" + transaction_id
