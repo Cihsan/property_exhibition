@@ -76,9 +76,9 @@ class BookingsViewSet(viewsets.ModelViewSet):
 
 Store_ID = "prope652e86dbd1b13"
 Store_Password = "prope652e86dbd1b13@ssl"
-SUCCESS_URL = "https://property-exhibition.netlify.app/"
-FAIL_URL = "https://property-exhibition.netlify.app/"
-CANCEL_URL = "https://property-exhibition.netlify.app/"
+SUCCESS_URL = "https://property-exhibition-ec83a.web.app"
+FAIL_URL = "https://property-exhibition-ec83a.web.app"
+CANCEL_URL = "https://property-exhibition-ec83a.web.app"
 
 
 def unique_trangection_id_generator(
@@ -140,7 +140,7 @@ def complete_transaction(request, tran_id):
     if booking is not None:
         booking.payment_status = "Completed"
         booking.save()
-        return redirect(origin)
+        return redirect('https://property-exhibition-ec83a.web.app')
     else:
         return JsonResponse("Something went wrong")
 
@@ -152,7 +152,7 @@ def cancel_transaction(request, tran_id):
     if booking is not None:
         booking.payment_status = "Canceled"
         booking.save()
-        return redirect(origin)
+        return redirect('https://property-exhibition-ec83a.web.app')
     else:
         return JsonResponse("Something went wrong")
 
