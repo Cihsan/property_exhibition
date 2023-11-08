@@ -107,9 +107,9 @@ def payment_view(request):
             post_body["currency"] = "BDT"
             transaction_id = unique_trangection_id_generator()
             post_body["tran_id"] = transaction_id
-            post_body["success_url"] = SUCCESS_URL + "/" + transaction_id
-            post_body["fail_url"] = FAIL_URL + "/" + transaction_id
-            post_body["cancel_url"] = CANCEL_URL + "/" + transaction_id
+            # post_body["success_url"] = SUCCESS_URL + "/" + transaction_id
+            # post_body["fail_url"] = FAIL_URL + "/" + transaction_id
+            # post_body["cancel_url"] = CANCEL_URL + "/" + transaction_id
             post_body["emi_option"] = 0
             post_body["cus_email"] = user.email
             post_body["cus_phone"] = user.userprofile.contact_no or "0123456789"
