@@ -76,9 +76,9 @@ class BookingsViewSet(viewsets.ModelViewSet):
 
 Store_ID = "prope652e86dbd1b13"
 Store_Password = "prope652e86dbd1b13@ssl"
-SUCCESS_URL = "https://property-exhibition.onrender.com/"
+SUCCESS_URL = "https://property-exhibition.netlify.app/"
 FAIL_URL = "https://property-exhibition.netlify.app/"
-CANCEL_URL = "https://property-exhibition.onrender.com/"
+CANCEL_URL = "https://property-exhibition.netlify.app/"
 
 
 def unique_trangection_id_generator(
