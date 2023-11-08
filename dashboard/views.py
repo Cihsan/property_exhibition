@@ -76,9 +76,9 @@ class BookingsViewSet(viewsets.ModelViewSet):
 
 Store_ID = "prope652e86dbd1b13"
 Store_Password = "prope652e86dbd1b13@ssl"
-SUCCESS_URL = "https://property-exhibition-ec83a.web.app"
-FAIL_URL = "https://property-exhibition-ec83a.web.app/contact"
-CANCEL_URL = "https://property-exhibition-ec83a.web.app/cancel"
+SUCCESS_URL = "https://property-exhibition-ec83a.web.app/"
+FAIL_URL = "https://property-exhibition-ec83a.web.app/contact/"
+CANCEL_URL = "https://property-exhibition-ec83a.web.app/about/"
 
 
 def unique_trangection_id_generator(
@@ -134,25 +134,21 @@ def payment_view(request):
 
 
 def complete_transaction(request, tran_id):
-    data = json.loads(request.body)
-    origin = data.get("origin")
     booking = Booking.objects.get(trans_id=tran_id)
     if booking is not None:
         booking.payment_status = "Completed"
         booking.save()
-        return redirect('https://property-exhibition-ec83a.web.app')
+        return redirect('https://property-exhibition-ec83a.web.app/')
     else:
         return JsonResponse("Something went wrong")
 
 
 def cancel_transaction(request, tran_id):
-    data = json.loads(request.body)
-    origin = data.get("origin")
     booking = Booking.objects.get(trans_id=tran_id)
     if booking is not None:
         booking.payment_status = "Canceled"
         booking.save()
-        return redirect('https://property-exhibition-ec83a.web.app')
+        return redirect('https://property-exhibition-ec83a.web.app/')
     else:
         return JsonResponse("Something went wrong")
 
