@@ -105,10 +105,11 @@ def payment_view(request):
             post_body = {}
             post_body["total_amount"] = (Decimal(property.price),)
             post_body["currency"] = "BDT"
-            post_body["tran_id"] = unique_trangection_id_generator()
-            post_body["success_url"] = SUCCESS_URL + "/" + post_body["tran_id"]
-            post_body["fail_url"] = FAIL_URL + "/" + post_body["tran_id"]
-            post_body["cancel_url"] = CANCEL_URL + "/" + post_body["tran_id"]
+            transaction_id = unique_trangection_id_generator()
+            post_body["tran_id"] = transaction_id
+            post_body["success_url"] = SUCCESS_URL + "/" + transaction_id
+            post_body["fail_url"] = FAIL_URL + "/" + transaction_id
+            post_body["cancel_url"] = CANCEL_URL + "/" + transaction_id
             post_body["emi_option"] = 0
             post_body["cus_email"] = user.email
             post_body["cus_phone"] = user.userprofile.contact_no or "0123456789"
@@ -122,14 +123,9 @@ def payment_view(request):
             post_body["product_category"] = property.type
             post_body["product_profile"] = "RealEstate"
             response = sslcommez.createSession(post_body)
-            booking_order = Booking.objects.create(
-                user=user,
-                property=property,
-                total_amount=int(property.price),
-                trans_id=post_body["tran_id"],
-                payment_status="Pending",
-            )
-            booking_order.save()
+            booking_instance = Booking.objects.get(booking_id=data.get("booking_id"))
+            booking_instance.trans_id = transaction_id
+            booking_instance.save()
             return JsonResponse(response)
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON data"}, status=400)
