@@ -77,8 +77,8 @@ class BookingsViewSet(viewsets.ModelViewSet):
 Store_ID = "prope652e86dbd1b13"
 Store_Password = "prope652e86dbd1b13@ssl"
 SUCCESS_URL = "https://property-exhibition-ec83a.web.app"
-FAIL_URL = "https://property-exhibition-ec83a.web.app"
-CANCEL_URL = "https://property-exhibition-ec83a.web.app"
+FAIL_URL = "https://property-exhibition-ec83a.web.app/contact"
+CANCEL_URL = "https://property-exhibition-ec83a.web.app/cancel"
 
 
 def unique_trangection_id_generator(
