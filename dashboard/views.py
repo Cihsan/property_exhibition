@@ -76,9 +76,9 @@ class BookingsViewSet(viewsets.ModelViewSet):
 
 Store_ID = "prope652e86dbd1b13"
 Store_Password = "prope652e86dbd1b13@ssl"
-SUCCESS_URL = "https://property-exhibition.onrender.com/success"
-FAIL_URL = "https://property-exhibition.netlify.app/contact"
-CANCEL_URL = "https://property-exhibition.onrender.com/cancel"
+SUCCESS_URL = "https://property-exhibition.onrender.com/"
+FAIL_URL = "https://property-exhibition.netlify.app/"
+CANCEL_URL = "https://property-exhibition.onrender.com/"
 
 
 def unique_trangection_id_generator(
@@ -108,12 +108,18 @@ def payment_view(request):
             post_body["currency"] = "BDT"
             transaction_id = unique_trangection_id_generator()
             post_body["tran_id"] = transaction_id
+            
+            post_body["success_url"] = origin + "/success_url/" + transaction_id
+            post_body["fail_url"] = origin + "/fail_url/" + transaction_id
+            post_body["cancel_url"] = origin + "/cancel_url/" + transaction_id
             # post_body[origin] = SUCCESS_URL + "/" + transaction_id
             # post_body[origin] = FAIL_URL + "/" + transaction_id
             # post_body[origin] = CANCEL_URL + "/" + transaction_id
-            post_body[origin] = + "/success_url" + transaction_id
-            post_body[origin] = + "/fail_url" + transaction_id
-            post_body[origin] = + "/cancel_url" + transaction_id
+            
+            # post_body[origin] = + "/success_url" + transaction_id
+            # post_body[origin] = + "/fail_url" + transaction_id
+            # post_body[origin] = + "/cancel_url" + transaction_id
+            
             post_body["emi_option"] = 0
             post_body["cus_email"] = user.email
             post_body["cus_phone"] = user.userprofile.contact_no or "0123456789"
